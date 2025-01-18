@@ -23,80 +23,94 @@
 <a href="https://discord.gg/gcmNyAAFfV">📢 Discord</a>
 </p>
 
-AgentGPT allows you to configure and deploy Autonomous AI agents.
-Name your own custom AI and have it embark on any goal imaginable.
-It will attempt to reach the goal by thinking of tasks to do, executing them, and learning from the results 🚀.
+# AgentGPT with Groq Integration
 
----
+A modern AI chatbot platform powered by Groq's API, featuring specialized agents for various tasks including research, travel planning, studying, and game design.
 
-## ✨ Demo
-For the best demo experience, try [our site](https://agentgpt.reworkd.ai) directly :)
+## 🚀 Features
 
-[Demo Video](https://github.com/reworkd/AgentGPT/assets/50181239/5348e44a-29a5-4280-a06b-fe1429a8d99e)
+- 🤖 Multiple Specialized Agents
+  - Research Assistant
+  - Travel Planner
+  - Study Buddy
+  - Game Designer
+  - And more!
 
+- 💻 Modern Frontend Interface
+  - Responsive design
+  - Dark theme
+  - Interactive chat interface
+  - Template-based agent creation
 
-## 👨‍🚀 Getting Started
+- 🔧 Technical Features
+  - Real-time chat with AI agents
+  - Template management system
+  - Persistent conversation history
+  - Error handling and loading states
 
-The easiest way to get started with AgentGPT is automatic setup CLI bundled with the project.
-The cli sets up the following for AgentGPT:
-- 🔐 [Environment variables](https://github.com/reworkd/AgentGPT/blob/main/.env.example) (and API Keys)
-- 🗂️ [Database](https://github.com/reworkd/AgentGPT/tree/main/db) (Mysql)
-- 🤖 [Backend](https://github.com/reworkd/AgentGPT/tree/main/platform) (FastAPI)
-- 🎨 [Frontend](https://github.com/reworkd/AgentGPT/tree/main/next) (Nextjs)
+## 📋 Prerequisites
 
-## Prerequisites :point_up:
+- Node.js (v16 or higher)
+- npm or yarn
+- Groq API key
 
-Before you get started, please make sure you have the following installed:
+## 🛠️ Installation
 
-- An editor of your choice. For example, [Visual Studio Code (VS Code)](https://code.visualstudio.com/download)
-- [Node.js](https://nodejs.org/en/download)
-- [Git](https://git-scm.com/downloads)
-- [Docker](https://www.docker.com/products/docker-desktop). After installation, please create an account, open up the Docker application, and sign in.
-- An [OpenAI API key](https://platform.openai.com/signup)
-- A [Serper API Key](https://serper.dev/signup) (optional)
-- A [Replicate API Token](https://replicate.com/signin) (optional)
-
-## Getting Started :rocket:
-1. **Open your editor**
-
-2. **Open the Terminal** - Typically, you can do this from a 'Terminal' tab or by using a shortcut
-   (e.g., `Ctrl + ~` for Windows or `Control + ~` for Mac in VS Code).
-
-3. **Clone the Repository and Navigate into the Directory** - Once your terminal is open, you can clone the repository and move into the directory by running the commands below.
-
-   **For Mac/Linux users** :apple: :penguin:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/reworkd/AgentGPT.git
-   cd AgentGPT
-   ./setup.sh
+   git clone https://github.com/OSOSerious/agent-template-groq-.git
+   cd agent-template-groq-
    ```
-   **For Windows users** :windows:
+
+2. Install dependencies:
    ```bash
-   git clone https://github.com/reworkd/AgentGPT.git
-   cd AgentGPT
-   ./setup.bat
+   cd frontend
+   npm install
    ```
-4. **Follow the setup instructions from the script** - add the appropriate API keys, and once all of the services are running, travel to [http://localhost:3000](http://localhost:3000) on your web-browser.
 
-Happy hacking! :tada:
+3. Create a `.env` file in the root directory and add your Groq API key:
+   ```
+   GROQ_API_KEY=your_api_key_here
+   ```
 
-## 🎉 Roadmap
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-This platform is currently in beta, a full list of completed and planed features can be found on
-our [public roadmap](https://docs.reworkd.ai/essentials/roadmap).
+## 🎯 Usage
 
+1. Navigate to the application in your browser
+2. Choose a template from the available agents
+3. Start chatting with your chosen AI agent
+4. Use the sidebar to switch between different views and create new agents
 
-## 🚀 Tech Stack
+## 🏗️ Project Structure
 
-- ✅ **Bootstrapping**: [create-t3-app](https://create.t3.gg) + [FastAPI-template](https://github.com/s3rius/FastAPI-template).
-- ✅ **Framework**: [Nextjs 13 + Typescript](https://nextjs.org/) + [FastAPI](https://fastapi.tiangolo.com/)
-- ✅ **Auth**: [Next-Auth.js](https://next-auth.js.org)
-- ✅ **ORM**: [Prisma](https://prisma.io) & [SQLModel](https://sqlmodel.tiangolo.com/).
-- ✅ **Database**: [Planetscale](https://planetscale.com/).
-- ✅ **Styling**: [TailwindCSS + HeadlessUI](https://tailwindcss.com).
-- ✅ **Schema Validation**: [Zod](https://github.com/colinhacks/zod) + [Pydantic](https://docs.pydantic.dev/).
-- ✅ **LLM Tooling**: [Langchain](https://github.com/hwchase17/langchain).
+```
+frontend/
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── lib/           # Utility functions and API calls
+│   ├── stores/        # Svelte stores for state management
+│   └── types.ts       # TypeScript type definitions
+├── public/            # Static assets
+└── index.html         # Entry point
+```
 
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Powered by Groq's API
+- Built with Svelte and TailwindCSS
+- Icons from Heroicons
 
 <h2 align="center">
 💝 Our GitHub sponsors 💝
@@ -125,87 +139,3 @@ Our contributors have made this project possible. Thank you! 🙏
 <div align="center">
 <sub>Made with <a href="https://contrib.rocks">contrib.rocks</a>.</sub>
 </div>
-
-# AgentGPT
-
-AgentGPT is a powerful AI agent platform powered by Groq's fast inference API. It provides specialized agents for various tasks like research, travel planning, studying, and game design.
-
-## Features
-
-- Multiple specialized agents (Research, Travel, Study, Game Design)
-- Fast inference using Groq API
-- Easy-to-use REST API
-- Customizable templates
-- Streaming support
-
-## Project Structure
-
-```
-.
-├── src/
-│   ├── api/              # API endpoints and interfaces
-│   ├── templates/        # Agent templates
-│   ├── utils/           # Utility functions
-│   └── static/          # Static files
-├── tests/               # Test files
-├── .env                 # Environment variables
-├── requirements.txt     # Python dependencies
-└── run.py              # Main entry point
-```
-
-## Installation
-
-1. Clone the repository
-2. Create a virtual environment:
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Copy `.env.example` to `.env` and add your Groq API key:
-   ```bash
-   GROQ_API_KEY=your-api-key-here
-   ```
-
-## Running the Server
-
-```bash
-python run.py
-```
-
-The server will start on http://localhost:8000
-
-## API Endpoints
-
-- `GET /`: Welcome message
-- `GET /templates`: List available templates
-- `POST /chat`: Chat with an agent
-  ```json
-  {
-    "template": "ResearchGPT",
-    "message": "Tell me about quantum computing",
-    "systemPrompt": null
-  }
-  ```
-
-## Available Templates
-
-- ResearchGPT: Generate thorough reports on specific subjects
-- TravelGPT: Plan detailed journeys to selected destinations
-- StudyGPT: Design study plans for selected topics
-- PlatformerGPT: Create platformer game designs
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
