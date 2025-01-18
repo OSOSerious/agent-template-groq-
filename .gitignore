@@ -53,3 +53,7 @@ yarn-error.log*
 /volumes/
 schema.prismae
 *.sql
+
+# Virtual environment
+venv/
+```
