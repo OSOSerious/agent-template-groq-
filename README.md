@@ -110,6 +110,150 @@ The application will be available at:
 3. Select a template to start chatting
 4. Interact with the agent based on its specialization
 
+### CLI Commands and Tools
+
+#### Development Commands
+
+Start the backend server with hot reload:
+```bash
+# Basic start
+uvicorn main:app --reload --port 8000
+
+# With specific host
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+# With increased worker count
+uvicorn main:app --reload --workers 4 --port 8000
+```
+
+Start the frontend development server:
+```bash
+# Basic start
+npm run dev
+
+# With specific host and port
+npm run dev -- --host 0.0.0.0 --port 3000
+
+# Production build
+npm run build
+```
+
+#### Database Management
+```bash
+# Initialize the database
+python scripts/init_db.py
+
+# Reset the database
+python scripts/reset_db.py
+```
+
+#### Template Management
+```bash
+# List all available templates
+python scripts/list_templates.py
+
+# Add a new template
+python scripts/add_template.py --name "CustomAgent" --description "Your description" --prompt "Your system prompt"
+
+# Remove a template
+python scripts/remove_template.py --name "CustomAgent"
+```
+
+#### Testing Commands
+```bash
+# Run all tests
+pytest
+
+# Run specific test file
+pytest tests/test_groq_interface.py
+
+# Run tests with coverage
+pytest --cov=src tests/
+```
+
+#### API Usage Examples
+
+Test the chat endpoint:
+```bash
+# Send a message to the research agent
+curl -X POST http://localhost:8000/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "template": "research",
+    "message": "Tell me about AI",
+    "systemPrompt": null
+  }'
+
+# Send a message to a custom agent
+curl -X POST http://localhost:8000/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "template": "custom",
+    "message": "Hello",
+    "systemPrompt": "You are a helpful assistant"
+  }'
+```
+
+Check server status:
+```bash
+# Health check
+curl http://localhost:8000/health
+
+# Version check
+curl http://localhost:8000/version
+```
+
+List available templates:
+```bash
+curl http://localhost:8000/api/templates
+```
+
+#### Environment Management
+```bash
+# Create a new virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+# On Unix or MacOS:
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Update dependencies
+pip install -r requirements.txt --upgrade
+```
+
+#### Docker Commands
+```bash
+# Build the container
+docker build -t agent-template-groq .
+
+# Run the container
+docker run -p 8000:8000 -e GROQ_API_KEY=your_key_here agent-template-groq
+
+# Run with volume mount for development
+docker run -p 8000:8000 -v $(pwd):/app agent-template-groq
+
+# Docker Compose
+docker-compose up --build
+```
+
+#### Troubleshooting Commands
+```bash
+# Check logs
+tail -f logs/app.log
+
+# Check running processes
+ps aux | grep "uvicorn"
+
+# Kill a specific port
+lsof -i :8000
+kill -9 <PID>
+```
+
 ### CLI Usage Examples
 
 Terminal 1 (Backend):
