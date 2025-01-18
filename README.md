@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center">
   <img src="https://raw.githubusercontent.com/reworkd/AgentGPT/main/next/public/banner.png" height="300" alt="AI Assistant Platform Logo"/>
 </p>
@@ -10,18 +11,9 @@
   <a href="https://github.com/reworkd/AgentGPT/blob/master/docs/README.zh-HANS.md"><img src="https://img.shields.io/badge/lang-简体中文-red.svg" alt="简体中文"></a>
   <a href="https://github.com/reworkd/AgentGPT/blob/master/docs/README.hu-Cs4K1Sr4C.md"><img src="https://img.shields.io/badge/lang-Hungarian-red.svg" alt="Hungarian"></a>
 </p>
+=======
+>>>>>>> ba412a0c733d4241d514a95a777a0a71c9ed1748
 
-<p align="center">
-<a href="https://agentgpt.reworkd.ai">🔗 Short link</a>
-<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://docs.reworkd.ai/">📚 Docs</a>
-<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://docs.reworkd.ai/essentials/contributing">🤝 Contribute</a>
-<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://twitter.com/reworkdai">🐦 Twitter</a>
-<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://discord.gg/gcmNyAAFfV">📢 Discord</a>
-</p>
 
 # AI Assistant Platform
 
@@ -112,6 +104,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Built with Svelte and TailwindCSS
 - Icons from Heroicons
 
+<<<<<<< HEAD
 <h2 align="center">
 💝 Our GitHub sponsors 💝
 </h2>
@@ -139,3 +132,5 @@ Our contributors have made this project possible. Thank you! 🙏
 <div align="center">
 <sub>Made with <a href="https://contrib.rocks">contrib.rocks</a>.</sub>
 </div>
+=======
+>>>>>>> ba412a0c733d4241d514a95a777a0a71c9ed1748

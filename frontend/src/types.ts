@@ -1,7 +1,8 @@
 export interface Template {
-  id: string;
   name: string;
-  description?: string;
+  description: string;
+  icon: string;
+  system_prompt: string;
 }
 
 export interface Message {

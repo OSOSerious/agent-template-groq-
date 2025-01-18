@@ -5,54 +5,48 @@
 
   const dispatch = createEventDispatcher();
 
-  export let selectedTemplate: Template;
+  export let template: Template;
   export let messages: Array<{role: string, content: string, thoughts?: string[]}> = [];
 
   let userInput = '';
   let isLoading = false;
   let error: string | null = null;
 
-  async function handleSubmit() {
+  async function handleSubmit(event: Event) {
+    event.preventDefault();
     if (!userInput.trim()) return;
 
     try {
       isLoading = true;
       error = null;
 
-      // Add user message
-      messages = [...messages, { role: 'user', content: userInput }];
+      const newMessage = {
+        role: 'user',
+        content: userInput
+      };
 
-      // Make API call
+      messages = [...messages, newMessage];
+      userInput = '';
+
       const response = await fetch('http://localhost:8000/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          template: selectedTemplate.id,
-          message: userInput
+          messages,
+          system_prompt: template.system_prompt
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response');
+        throw new Error('Failed to send message');
       }
 
       const data = await response.json();
-
-      // Add AI response
-      messages = [...messages, {
-        role: 'assistant',
-        content: data.response,
-        thoughts: data.thoughts || []
-      }];
-
-      // Clear input
-      userInput = '';
-
+      messages = [...messages, data];
     } catch (err) {
-      error = 'Failed to get response from AI';
-      console.error(err);
+      error = err instanceof Error ? err.message : 'Failed to send message';
     } finally {
       isLoading = false;
     }
@@ -63,103 +57,94 @@
   }
 </script>
 
-<div class="flex flex-col h-screen bg-gray-900">
+<div class="flex flex-col h-full">
   <!-- Header -->
-  <header class="flex items-center justify-between p-4 border-b border-gray-800">
-    <div class="flex items-center space-x-4">
-      <button
-        on:click={handleBack}
-        class="p-2 hover:bg-gray-800 rounded-full"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-      </button>
+  <div class="flex items-center p-4 border-b border-gray-200 dark:border-gray-700">
+    <button
+      class="mr-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+      on:click={handleBack}
+    >
+      ←
+    </button>
+    <div class="flex items-center">
+      <span class="text-2xl mr-2">{template.icon}</span>
       <div>
-        <h2 class="text-xl font-bold flex items-center space-x-2">
-          <span>{selectedTemplate.icon}</span>
-          <span>{selectedTemplate.name}</span>
+        <h2 class="font-semibold text-gray-900 dark:text-white">
+          {template.name}
         </h2>
-        <p class="text-sm text-gray-400">{selectedTemplate.description}</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          {template.description}
+        </p>
       </div>
     </div>
-    <div class="flex items-center space-x-2">
-      <button class="p-2 hover:bg-gray-800 rounded-full">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-        </svg>
-      </button>
-      <button class="p-2 hover:bg-gray-800 rounded-full">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-        </svg>
-      </button>
-    </div>
-  </header>
+  </div>
 
-  <!-- Chat Messages -->
+  <!-- Messages -->
   <div class="flex-1 overflow-y-auto p-4 space-y-4">
-    {#if messages.length === 0}
-      <div class="text-center text-gray-500 mt-8">
-        <p class="text-lg mb-2">👋 Hi! I'm your AI assistant.</p>
-        <p>I can help you {selectedTemplate.description.toLowerCase()}</p>
-        <p class="text-sm mt-2">Try asking me something!</p>
-      </div>
-    {/if}
-
     {#each messages as message}
-      <div class="flex flex-col {message.role === 'user' ? 'items-end' : 'items-start'}">
-        <div class="max-w-3xl {message.role === 'user' ? 'bg-blue-600' : 'bg-gray-800'} rounded-lg p-4">
-          <div class="flex items-center space-x-2 mb-2">
-            <span class="text-lg">{message.role === 'user' ? '👤' : '🤖'}</span>
-            <span class="font-semibold">{message.role === 'user' ? 'You' : selectedTemplate.name}</span>
+      <div class="flex gap-3 {message.role === 'assistant' ? 'flex-row' : 'flex-row-reverse'}">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
+          {message.role === 'assistant' ? template.icon : '👤'}
+        </div>
+        <div class="flex-1">
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
+            <p class="text-gray-900 dark:text-white whitespace-pre-wrap">
+              {message.content}
+            </p>
           </div>
-          <p class="whitespace-pre-wrap">{message.content}</p>
-          {#if message.thoughts && message.thoughts.length > 0}
-            <div class="mt-3 pt-3 border-t border-gray-700">
-              <div class="text-sm text-gray-400">Thoughts:</div>
-              <ul class="list-disc list-inside text-sm text-gray-300">
-                {#each message.thoughts as thought}
-                  <li>{thought}</li>
-                {/each}
-              </ul>
+          {#if message.thoughts}
+            <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+              {#each message.thoughts as thought}
+                <p>💭 {thought}</p>
+              {/each}
             </div>
           {/if}
         </div>
       </div>
     {/each}
-
     {#if isLoading}
-      <div class="flex items-center space-x-2 text-gray-400">
-        <div class="animate-bounce">⚪</div>
-        <div class="animate-bounce delay-100">⚪</div>
-        <div class="animate-bounce delay-200">⚪</div>
+      <div class="flex gap-3">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
+          {template.icon}
+        </div>
+        <div class="flex-1">
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
+            <p class="text-gray-500 dark:text-gray-400">Thinking...</p>
+          </div>
+        </div>
       </div>
     {/if}
   </div>
 
-  <!-- Input Form -->
-  <div class="border-t border-gray-800 p-4">
+  <!-- Input -->
+  <form
+    class="p-4 border-t border-gray-200 dark:border-gray-700"
+    on:submit={handleSubmit}
+  >
     {#if error}
-      <div class="mb-4 p-3 bg-red-900/50 text-red-200 rounded-lg">
+      <div class="mb-4 p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-100 rounded">
         {error}
       </div>
     {/if}
-    
-    <form on:submit|preventDefault={handleSubmit} class="flex space-x-4">
+    <div class="flex gap-4">
       <input
         type="text"
         bind:value={userInput}
         placeholder="Type your message..."
-        class="flex-1 bg-gray-800 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        class="flex-1 p-2 rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+        disabled={isLoading}
       />
       <button
         type="submit"
+        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
         disabled={isLoading || !userInput.trim()}
-        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Send
       </button>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>
+
+<style>
+  /* Add any custom styles here */
+</style>
