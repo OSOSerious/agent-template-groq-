@@ -1,26 +1,32 @@
 # AI Assistant Platform
 
-A modern AI chatbot platform powered by Groq's API, featuring specialized agents for various tasks including research, travel planning, studying, and game design.
+A modern AI chatbot platform powered by Groq's API, featuring an AgentGPT-style interface for creating personal AI agents and specialized templates for various tasks.
 
 ## 🚀 Features
 
-### 🤖 Multiple Specialized Agents
+### 🤖 Personal AI Agent Creation
+- Create your own AI agent with a name and goal
+- Instantly chat with your personalized agent
+- Example goals to help you get started
+- Modern, AgentGPT-style interface
 
-- Research Assistant
-- Travel Planner
-- Study Buddy
-- Game Designer
-- And more!
+### 📚 Specialized Agent Templates
+- Research Assistant: Generate comprehensive reports and analysis
+- Travel Planner: Plan detailed trips and itineraries
+- Study Buddy: Create study plans and learning materials
+- Game Designer: Design platformer games and mechanics
+- Code Generator: Generate code snippets in various languages
+- Web Search Assistant: Search and summarize web information
 
 ### 💻 Modern Frontend Interface
-
-- Responsive design
-- Dark theme
+- Clean, dark theme design
+- Responsive layout for all devices
 - Interactive chat interface
-- Template-based agent creation
+- Real-time agent responses
+- Template-based agent selection
 
 ### 🔧 Technical Features
-
+- Powered by Groq's fast inference API
 - Real-time chat with AI agents
 - Template management system
 - Persistent conversation history
@@ -30,6 +36,7 @@ A modern AI chatbot platform powered by Groq's API, featuring specialized agents
 
 - Node.js (v16 or higher)
 - npm or yarn
+- Python 3.8 or higher
 - Groq API key (sign up at https://console.groq.com)
 
 ## 🛠️ Installation & Running
@@ -89,11 +96,21 @@ The application will be available at:
 - Backend API: http://localhost:8000
 - API Documentation: http://localhost:8000/docs
 
-## 🎯 CLI Usage Examples
+## 🎯 Usage Guide
 
-### Starting Both Services
+### Creating a Personal Agent
+1. Visit the home page
+2. Enter a name for your agent
+3. Define your agent's goal (or select from examples)
+4. Click "Deploy Agent" to start chatting
 
-You can start both services in separate terminal windows:
+### Using Template Agents
+1. Click "Templates" in the sidebar
+2. Browse available specialized agents
+3. Select a template to start chatting
+4. Interact with the agent based on its specialization
+
+### CLI Usage Examples
 
 Terminal 1 (Backend):
 ```bash
@@ -107,9 +124,9 @@ cd agent-template-groq-/frontend
 npm run dev
 ```
 
-### Using the API via curl
+### API Examples
 
-Test the API directly from the command line:
+Test the API directly:
 
 1. Send a chat message:
 ```bash
@@ -130,14 +147,18 @@ curl http://localhost:8000/health
 ├── frontend/
 │   ├── src/
 │   │   ├── components/     # Reusable UI components
+│   │   │   ├── NewAgent.svelte    # Personal agent creation
+│   │   │   ├── Chat.svelte        # Chat interface
+│   │   │   └── TemplateGrid.svelte # Template selection
 │   │   ├── lib/           # Utility functions and API calls
 │   │   ├── stores/        # Svelte stores for state management
 │   │   └── types.ts       # TypeScript type definitions
 │   ├── public/           # Static assets
 │   └── index.html        # Entry point
-├── groq-agents/         # Agent templates
+├── src/
+│   ├── templates/        # Agent template definitions
+│   └── api/             # API implementations
 ├── main.py             # FastAPI backend entry point
-├── groq_interface.py   # Groq API integration
 └── requirements.txt    # Python dependencies
 ```
 
@@ -148,8 +169,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Powered by Groq's API
-- Built with Svelte and TailwindCSS
