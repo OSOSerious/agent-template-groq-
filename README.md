@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/reworkd/AgentGPT/main/next/public/banner.png" height="300" alt="AgentGPT Logo"/>
+  <img src="https://raw.githubusercontent.com/reworkd/AgentGPT/main/next/public/banner.png" height="300" alt="AI Assistant Platform Logo"/>
 </p>
 <p align="center">
   <em>🤖 Assemble, configure, and deploy autonomous AI Agent(s) in your browser. 🤖   </em>
@@ -23,7 +23,7 @@
 <a href="https://discord.gg/gcmNyAAFfV">📢 Discord</a>
 </p>
 
-# AgentGPT with Groq Integration
+# AI Assistant Platform
 
 A modern AI chatbot platform powered by Groq's API, featuring specialized agents for various tasks including research, travel planning, studying, and game design.
 
@@ -117,7 +117,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 </h2>
 
 <p align="center">
-Join us in fueling the development of AgentGPT, an open-source project pushing the boundaries of AI agents! Your sponsorship would drive progress by helping us scale up resources, enhance features and functionality, and continue to iterate on this exciting project! 🚀
+Join us in fueling the development of this project, an open-source project pushing the boundaries of AI agents! Your sponsorship would drive progress by helping us scale up resources, enhance features and functionality, and continue to iterate on this exciting project! 🚀
 </p>
 
 <p align="center">
