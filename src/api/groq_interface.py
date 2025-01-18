@@ -13,17 +13,43 @@ class GroqInterface:
             
         self.client = Groq(api_key=api_key)
         self.model = "llama2-70b-4096"
-        self.load_templates()
+        self.templates = self.load_all_templates()
     
-    def load_templates(self):
-        """Load templates from templates directory"""
+    def load_all_templates(self):
+        """Load templates from all sources"""
+        templates = {}
+        # Load templates from Python file
         try:
-            from ..templates.agent_templates import TEMPLATES
-            self.templates = TEMPLATES
-            logger.info(f"Loaded {len(self.templates)} templates")
+            from ..templates.agent_templates import TEMPLATES as PY_TEMPLATES
+            templates.update(PY_TEMPLATES)
+            logger.info(f"Loaded {len(PY_TEMPLATES)} templates from Python file")
         except Exception as e:
-            logger.error(f"Error loading templates: {e}")
-            self.templates = {}
+            logger.error(f"Error loading templates from Python file: {e}")
+
+        # Load templates from JSON files in backend/templates directory
+        templates_dir = "backend/templates"
+        try:
+            import json
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            full_templates_dir = os.path.join(base_dir, '..', '..', templates_dir)
+            for filename in os.listdir(full_templates_dir):
+                if filename.endswith(".json"):
+                    filepath = os.path.join(full_templates_dir, filename)
+                    with open(filepath, 'r') as f:
+                        try:
+                            template = json.load(f)
+                            templates[template["name"].replace(" ", "")] = template
+                            logger.info(f"Loaded template from {filename}")
+                        except json.JSONDecodeError as e:
+                            logger.error(f"Error decoding JSON in {filename}: {e}")
+                        except KeyError as e:
+                            logger.error(f"Error loading template from {filename}: Missing 'name' key")
+            logger.info(f"Loaded {len(templates)} templates from JSON files")
+        except FileNotFoundError:
+            logger.error(f"Directory not found: {templates_dir}")
+        except Exception as e:
+            logger.error(f"Error loading templates from {templates_dir}: {e}")
+        return templates
 
     def get_completion(self, messages: List[Dict[str, str]], template: str = None, max_tokens: int = 1024) -> str:
         """

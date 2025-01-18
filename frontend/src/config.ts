@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://localhost:8002';
+export const API_BASE_URL = 'http://localhost:8000';
 
 export const API_ENDPOINTS = {
     CHAT_MESSAGE: `${API_BASE_URL}/chat/message`,
@@ -6,7 +6,7 @@ export const API_ENDPOINTS = {
     TEMPLATES: `${API_BASE_URL}/templates`,
 };
 
-export const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY || '';
+export const GROQ_API_KEY = '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';
 
 // Default Groq model to use
 export const DEFAULT_MODEL = 'llama-3.3-70b-versatile';

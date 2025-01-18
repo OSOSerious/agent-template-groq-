@@ -39,8 +39,8 @@
 
   function handleNewAgent(event: CustomEvent) {
     const newAgent = event.detail;
-    templates = [...templates, newAgent];
-    currentView = 'templates';
+    selectedTemplate = newAgent;
+    currentView = 'chat';
   }
 </script>
 
@@ -51,7 +51,9 @@
     <Sidebar on:viewChange={handleViewChange} />
     
     <div class="flex-1 overflow-hidden">
-      {#if currentView === 'home' || currentView === 'templates'}
+      {#if currentView === 'home'}
+        <NewAgent on:create={handleNewAgent} />
+      {:else if currentView === 'templates'}
         <div class="h-full p-8">
           <h1 class="text-3xl font-bold mb-8">Choose Your AI Assistant</h1>
           <TemplateGrid 
